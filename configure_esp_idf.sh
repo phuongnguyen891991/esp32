@@ -1,6 +1,6 @@
-#!/bin/sh
-# Setup tool on Linux
+#!/bin/bash
 
+# Setup tool on Linux
 PARENT_DIR="`pwd`"
 echo "$PARENT_DIR"
 
@@ -30,16 +30,20 @@ echo "..........................Build toolchain"
 ./ct-ng build
 chmod -R u+w builds/xtensa-esp32-elf
 
+# use this if do not want to compile compiler
+# wget http://www.neilkolban.com/esp32/downloads/xtensa-esp32-elf.tar.gz
+# sudo tar --extract --directory /opt --ungzip --file xtensa-esp32-elf.tar.gz
+
 #Add toolchains to path
 echo "..........................Export the toolchains to PATH"
-export PATH="$WORK_DIR/crosstool-NG/xtensa-esp32-elf/bin:$PATH"
+export PATH="$WORK_DIR/crosstool-NG/builds/xtensa-esp32-elf/bin:$PATH"
 printenv PATH
 #clone the source code of esp-idf
 cd "${WORK_DIR}"
 git clone --recursive https://github.com/espressif/esp-idf.git
 
 # install python 3
-sudo apt-get install python3 python3-pip python3-setuptools
+sudo apt-get install -y python3 python3-pip python3-setuptools
 
 #Making Python 3 the default interpreter is possible by running:
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10
@@ -49,4 +53,6 @@ cd "${WORK_DIR}/esp-idf"
 ./install.sh
 
 #Setup environment
-./export.sh
+#Note the space between the leading dot and the path!
+echo ".......... `pwd`"
+source ${WORK_DIR}/esp-idf/export.sh
