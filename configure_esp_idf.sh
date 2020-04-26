@@ -54,5 +54,6 @@ cd "${WORK_DIR}/esp-idf"
 
 #Setup environment
 #Note the space between the leading dot and the path!
+cd "${WORK_DIR}/esp-idf"
 echo ".......... `pwd`"
-source ${WORK_DIR}/esp-idf/export.sh
+source export.sh
