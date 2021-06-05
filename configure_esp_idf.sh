@@ -8,7 +8,7 @@ mkdir -p "${PARENT_DIR}/esp32"
 WORK_DIR="${PARENT_DIR}/esp32"
 
 #install prerequisites on debian/ubuntu
-sudo apt-get install -y git wget libncurses-dev flex bison gperf python python-pip python-setuptools python-serial python-click python-cryptography python-future python-pyparsing python-pyelftools cmake ninja-build ccache libffi-dev libssl-dev
+sudo apt-get install -y git wget libncurses-dev flex bison gperf python python3-pip python-setuptools python-serial python-click python-cryptography python-future python-pyparsing python-pyelftools cmake ninja-build ccache libffi-dev libssl-dev
 
 # compile the toolchain from source
 sudo apt-get install -y gawk gperf grep gettext libncurses-dev python python-dev automake bison flex texinfo help2man libtool libtool-bin make
@@ -51,6 +51,9 @@ sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 #setup the tools
 cd "${WORK_DIR}/esp-idf"
 ./install.sh
+
+# install packet following requirement systems
+pip install -r requirements.txt
 
 #Setup environment
 #Note the space between the leading dot and the path!
